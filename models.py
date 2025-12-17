@@ -100,7 +100,7 @@ class VacationPlannerLLM:
             logging_steps=10,
             eval_steps=25,
             save_steps=50,
-            evaluation_strategy="steps",
+            eval_strategy="steps",  # Changed from evaluation_strategy
             fp16=torch.cuda.is_available(),
             optim="paged_adamw_8bit",
             report_to="none",

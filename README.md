@@ -6,9 +6,7 @@ AI-powered vacation planning agent with multi-turn conversation, budget optimiza
 
 **Two-model system:**
 - **GPT-4** - Natural language understanding (extracts destination, budget, duration, preferences)
-- **Llama (LoRA fine-tuned)** - Natural language generation (friendly responses)
-
-Demonstrates: Multi-turn conversation, constraint satisfaction, LoRA fine-tuning, synthetic data generation.
+- **Llama (LoRA fine-tuned)** - Natural language generation for vacation options
 
 ## Quick Start
 

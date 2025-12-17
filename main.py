@@ -8,27 +8,19 @@ from agent import VacationPlanningAgent
 
 
 def main():
-    # Parse arguments
-    parser = argparse.ArgumentParser(description="Vacation Planning Agent")
-    parser.add_argument('--demo', action='store_true', help='Run in demo mode (no API key needed)')
-    args = parser.parse_args()
-    
     # Load environment
     load_dotenv()
     
-    # Check API key (unless demo mode)
-    if not args.demo and not os.getenv("OPENAI_API_KEY"):
-        print("⚠️  No OPENAI_API_KEY found. Options:")
-        print("1. Add to .env file")
-        print("2. Run in demo mode: python main.py --demo\n")
+    # Check API key
+    if not os.getenv("OPENAI_API_KEY"):
+        print("⚠️  No OPENAI_API_KEY found.")
+        print("Please set OPENAI_API_KEY environment variable.\n")
         sys.exit(1)
     
     # Print banner
     print("\n" + "="*60)
     print("🌴  VACATION PLANNING AGENT  ✈️")
     print("="*60)
-    if args.demo:
-        print("🎭 Running in DEMO mode (no API calls)\n")
     
     # Initialize agent
     print("🔧 Initializing agent...")
@@ -39,11 +31,10 @@ def main():
         
         if use_finetuned and os.path.exists(model_path):
             print(f"📦 Loading fine-tuned Llama from {model_path}...")
-            agent = VacationPlanningAgent(demo_mode=args.demo, use_finetuned_llm=True, 
-                                         finetuned_model_path=model_path)
+            agent = VacationPlanningAgent(use_finetuned_llm=True, finetuned_model_path=model_path)
             print("✅ Agent ready with fine-tuned Llama!\n")
         else:
-            agent = VacationPlanningAgent(demo_mode=args.demo)
+            agent = VacationPlanningAgent()
             print("✅ Agent ready!\n")
     except Exception as e:
         print(f"❌ Error: {e}")

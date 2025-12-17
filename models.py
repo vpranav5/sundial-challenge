@@ -1,8 +1,12 @@
 """
-ML models for vacation planning:
-1. LoRA fine-tuned LLM (Llama 3.2 3B)
-2. Neural preference ranker
+ML model for vacation planning:
+- LoRA fine-tuned LLM (Llama/TinyLlama) for natural language generation
 """
+
+import os
+# Disable MPS before importing torch
+os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
+os.environ["PYTORCH_MPS_HIGH_WATERMARK_RATIO"] = "0.0"
 
 import torch
 import torch.nn as nn
@@ -10,20 +14,9 @@ import torch.nn.functional as F
 from torch.utils.data import Dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, Trainer, TrainingArguments
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, PeftModel
-from sentence_transformers import SentenceTransformer
 from typing import List, Tuple
 from dataclasses import dataclass
 import json
-
-
-@dataclass
-class VacationOption:
-    """Vacation option for ranking."""
-    destination: str
-    hotel_category: str
-    activities: List[str]
-    total_cost: float
-    description: str
 
 
 class VacationPlannerLLM:
@@ -120,8 +113,36 @@ class VacationPlannerLLM:
     def load_finetuned(self, model_path: str):
         """Load fine-tuned model."""
         print(f"Loading fine-tuned model from {model_path}")
-        base_model = AutoModelForCausalLM.from_pretrained(self.model_name, device_map="auto", trust_remote_code=True)
+        
+        # Read base model name from adapter config
+        import json
+        from pathlib import Path
+        config_path = Path(model_path) / "adapter_config.json"
+        if config_path.exists():
+            with open(config_path) as f:
+                adapter_config = json.load(f)
+                base_model_name = adapter_config.get("base_model_name_or_path", self.model_name)
+        else:
+            base_model_name = self.model_name
+        
+        print(f"Loading base model: {base_model_name}")
+        # Force CPU device to avoid MPS issues on Mac
+        self.device = "cpu"
+        
+        # Disable MPS backend if on Mac
+        import os
+        os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
+        
+        base_model = AutoModelForCausalLM.from_pretrained(
+            base_model_name, 
+            torch_dtype=torch.float32,
+            trust_remote_code=True
+        )
+        base_model = base_model.to("cpu")
+        
         self.model = PeftModel.from_pretrained(base_model, model_path)
+        self.model = self.model.to("cpu")
+        self.model.eval()
         self.tokenizer = AutoTokenizer.from_pretrained(model_path)
         return self.model
     
@@ -130,7 +151,11 @@ class VacationPlannerLLM:
         if self.model is None:
             raise ValueError("Model not loaded")
         
-        inputs = self.tokenizer(prompt, return_tensors="pt").to(self.device)
+        # Ensure model is on CPU (avoid MPS issues on Mac)
+        device = "cpu"
+        self.model = self.model.to(device)
+        
+        inputs = self.tokenizer(prompt, return_tensors="pt").to(device)
         with torch.no_grad():
             outputs = self.model.generate(**inputs, max_length=max_length, temperature=temperature,
                                          do_sample=True, top_p=0.9, pad_token_id=self.tokenizer.eos_token_id)
@@ -158,67 +183,3 @@ class VacationDataset(Dataset):
             "attention_mask": encoding["attention_mask"].squeeze(),
             "labels": encoding["input_ids"].squeeze(),
         }
-
-
-class PreferenceRanker(nn.Module):
-    """Neural network for ranking vacation options."""
-    
-    def __init__(self, embedding_dim=384, hidden_dim=256):
-        super().__init__()
-        self.fc1 = nn.Linear(embedding_dim * 2, hidden_dim)
-        self.fc2 = nn.Linear(hidden_dim, hidden_dim // 2)
-        self.fc3 = nn.Linear(hidden_dim // 2, 1)
-        self.dropout = nn.Dropout(0.1)
-        self.encoder = SentenceTransformer('all-MiniLM-L6-v2')
-        self.encoder.eval()
-    
-    def forward(self, option_a: torch.Tensor, option_b: torch.Tensor) -> torch.Tensor:
-        """Predict probability that user prefers option_a over option_b."""
-        combined = torch.cat([option_a, option_b], dim=-1)
-        x = torch.relu(self.fc1(combined))
-        x = self.dropout(x)
-        x = torch.relu(self.fc2(x))
-        x = self.dropout(x)
-        return torch.sigmoid(self.fc3(x))
-    
-    def encode_option(self, option: VacationOption) -> torch.Tensor:
-        """Encode vacation option as embedding."""
-        description = f"Destination: {option.destination}. Hotel: {option.hotel_category}. " \
-                     f"Activities: {', '.join(option.activities)}. Cost: ${option.total_cost}. {option.description}"
-        with torch.no_grad():
-            embedding = self.encoder.encode(description, convert_to_tensor=True)
-        return embedding
-    
-    def rank_options(self, options: List[VacationOption]) -> List[Tuple[VacationOption, float]]:
-        """Rank options by preference score."""
-        if len(options) <= 1:
-            return [(opt, 1.0) for opt in options]
-        
-        embeddings = [self.encode_option(opt) for opt in options]
-        scores = torch.zeros(len(options))
-        
-        for i in range(len(options)):
-            for j in range(len(options)):
-                if i != j:
-                    with torch.no_grad():
-                        pref_score = self.forward(embeddings[i].unsqueeze(0), embeddings[j].unsqueeze(0)).item()
-                    scores[i] += pref_score
-        
-        scores = scores / (len(options) - 1)
-        return sorted(zip(options, scores.tolist()), key=lambda x: x[1], reverse=True)
-    
-    def update_from_feedback(self, preferred: VacationOption, rejected: VacationOption, 
-                            optimizer: torch.optim.Optimizer) -> float:
-        """Online learning from user feedback."""
-        emb_preferred = self.encode_option(preferred).unsqueeze(0)
-        emb_rejected = self.encode_option(rejected).unsqueeze(0)
-        
-        pref_score = self.forward(emb_preferred, emb_rejected)
-        target = torch.ones_like(pref_score)
-        loss = nn.functional.binary_cross_entropy(pref_score, target)
-        
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
-        
-        return loss.item()

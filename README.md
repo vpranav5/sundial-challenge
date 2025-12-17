@@ -1,56 +1,80 @@
-# Budget-Optimized Vacation Planning Agent
+# Vacation Planning Agent
 
-An AI agent that plans vacations with budget optimization and adaptive preference learning. Uses a custom state machine (no LangGraph) with GPT-4 for orchestration, a neural preference ranker for personalization, and LoRA fine-tuned Llama 3.2 3B for domain-specific generation. Demonstrates multi-turn conversation, goal-oriented planning, and uncertainty handling through trade-off negotiation.
+AI-powered vacation planning agent with multi-turn conversation, budget optimization, and natural language generation. Uses GPT-4 for NLU and fine-tuned Llama for generation.
 
 ## Architecture
 
-GPT-4 handles intent understanding and orchestration. A custom-trained neural preference ranker learns user preferences online during conversation. LoRA fine-tuned Llama 3.2 3B generates vacation-specific text (demonstrates large model training, 4-bit quantization, parameter-efficient fine-tuning).
+**Two-model system:**
+- **GPT-4** - Natural language understanding (extracts destination, budget, duration, preferences)
+- **Llama (LoRA fine-tuned)** - Natural language generation (friendly responses)
 
-## Setup
+Demonstrates: Multi-turn conversation, constraint satisfaction, LoRA fine-tuning, synthetic data generation.
+
+## Quick Start
 
 ```bash
-# Install dependencies
+# 1. Install dependencies
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 
-# Add OpenAI API key
-cp .env.example .env
-# Edit .env: OPENAI_API_KEY=sk-...
+# 2. Run with GPT-4 only
+OPENAI_API_KEY=your-key-here python main.py
+
+# 3. Run with GPT-4 + fine-tuned Llama
+OPENAI_API_KEY=your-key-here USE_FINETUNED_LLM=true python main.py
 ```
 
-## Run
+## Example Usage
 
-```bash
-# With GPT-4 (requires API key)
-python main.py
+```
+👤 You: Plan a 7 day trip to Bali with $3000 budget
 
-# Demo mode (no API key needed)
-python main.py --demo
+🤖 Agent: I found 2 options for Bali:
+
+**Option 1:** Budget ($2255)
+- Hotel: Cozy Guesthouse (4.2★) - $45/night
+- Flight: Singapore Airlines - $1600
+- Activities: Temple Tour, Surf Lesson, Cooking Class, Spa Day, Volcano Hike
+
+**Option 2:** Mid-Range ($2780)
+- Hotel: Ubud Boutique Hotel (4.5★) - $120/night
+- Flight: Singapore Airlines - $1600
+- Activities: Temple Tour, Surf Lesson, Cooking Class, Spa Day, Volcano Hike
+
+Select 1 or 2, or say 'cheaper', 'more activities', or add preferences like 'adventure' or 'food'.
+
+👤 You: 1
+
+🤖 Agent: ✅ Booked! Your 7-day Bali vacation:
+...
 ```
 
-## Train
+## Training Llama
 
 ```bash
-# Generate synthetic data
+# Generate synthetic training data
 python data_gen.py
 
-# Train LoRA model (1-2 hours)
-python train.py --steps 100 --batch-size 4
+# Train on GPU (Colab recommended)
+python train.py --model TinyLlama/TinyLlama-1.1B-Chat-v1.0 --steps 100
+
+# Model saved to: ./models/vacation-planner-lora
 ```
 
-## Test
+## Testing
 
 ```bash
-pytest tests/ -v
+# Run tests
+python test_agent.py
 ```
 
 ## Files
 
-- `agent.py` - State machine and orchestration
-- `models.py` - LoRA fine-tuning + preference ranker
+- `main.py` - CLI entry point
+- `agent.py` - Conversation agent (~170 lines)
+- `models.py` - Llama LoRA fine-tuning
 - `tools.py` - Mock APIs (flights, hotels, activities)
-- `data_gen.py` - Synthetic conversation generation
+- `data_gen.py` - Synthetic data generation
 - `train.py` - Training script
-- `main.py` - CLI interface
-- `tests/` - Unit tests
+- `test_agent.py` - Simple tests

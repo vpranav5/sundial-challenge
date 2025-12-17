@@ -1,0 +1,482 @@
+[
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want a 14-day trip to Bali with $1500 budget"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! For Bali with $1500, I found:\n- Flights: $1506\n- Hotels: $48-$240/night\n- Remaining: $-1686 for activities\n\nPrefer budget, mid-range, or luxury?"
+      },
+      {
+        "role": "user",
+        "content": "Luxury"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! Bali Resort at $120/night. Activities:\n1. Temple Tour ($40)\n2. Surf Lesson ($60)\n\nTotal: $3286. Good?"
+      }
+    ],
+    "metadata": {
+      "destination": "Bali",
+      "budget": 1500
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want a adventure vacation to Tokyo"
+      },
+      {
+        "role": "assistant",
+        "content": "Tokyo is perfect for adventure! Budget and duration?"
+      },
+      {
+        "role": "user",
+        "content": "$3500 for 5 days"
+      },
+      {
+        "role": "assistant",
+        "content": "With $3500 for 5 days:\n\nFlights: $1829\nHotel: Tokyo Resort - $140/night\nActivities: Temple Tour, Sushi Making\n\nTotal: $2689"
+      }
+    ],
+    "metadata": {
+      "destination": "Tokyo",
+      "budget": 3500
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want a 5-day trip to Cancun with $4000 budget"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! For Cancun with $4000, I found:\n- Flights: $836\n- Hotels: $60-$300/night\n- Remaining: $2414 for activities\n\nPrefer budget, mid-range, or luxury?"
+      },
+      {
+        "role": "user",
+        "content": "Luxury"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! Cancun Resort at $150/night. Activities:\n1. Snorkeling ($80)\n2. Taco Tour ($50)\n\nTotal: $1716. Good?"
+      }
+    ],
+    "metadata": {
+      "destination": "Cancun",
+      "budget": 4000
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want a 14-day trip to Tokyo with $5000 budget"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! For Tokyo with $5000, I found:\n- Flights: $1703\n- Hotels: $56-$280/night\n- Remaining: $1337 for activities\n\nPrefer budget, mid-range, or luxury?"
+      },
+      {
+        "role": "user",
+        "content": "Mid-range"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! Tokyo Resort at $140/night. Activities:\n1. Temple Tour ($40)\n2. Mt. Fuji ($150)\n\nTotal: $3853. Good?"
+      }
+    ],
+    "metadata": {
+      "destination": "Tokyo",
+      "budget": 5000
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want luxury Bali for $5000"
+      },
+      {
+        "role": "assistant",
+        "content": "$5000 is tight for luxury. Options:\nA) Luxury hotel, 1 days\nB) Mid-range hotel, 3 days\nC) Different destination\n\nWhich?"
+      },
+      {
+        "role": "user",
+        "content": "Option B"
+      },
+      {
+        "role": "assistant",
+        "content": "Smart! 3-day itinerary:\n\nFlights: $1695\nHotel: Bali Resort - $120/night\nActivities: Temple Tour, Cooking Class\n\nTotal: $2165"
+      }
+    ],
+    "metadata": {
+      "destination": "Bali",
+      "budget": 5000
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want luxury Iceland for $3500"
+      },
+      {
+        "role": "assistant",
+        "content": "$3500 is tight for luxury. Options:\nA) Luxury hotel, 1 days\nB) Mid-range hotel, 3 days\nC) Different destination\n\nWhich?"
+      },
+      {
+        "role": "user",
+        "content": "Option B"
+      },
+      {
+        "role": "assistant",
+        "content": "Smart! 3-day itinerary:\n\nFlights: $1061\nHotel: Iceland Resort - $130/night\nActivities: Glacier Hike, Blue Lagoon\n\nTotal: $1681"
+      }
+    ],
+    "metadata": {
+      "destination": "Iceland",
+      "budget": 3500
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want luxury Cancun for $3500"
+      },
+      {
+        "role": "assistant",
+        "content": "$3500 is tight for luxury. Options:\nA) Luxury hotel, 1 days\nB) Mid-range hotel, 3 days\nC) Different destination\n\nWhich?"
+      },
+      {
+        "role": "user",
+        "content": "Option B"
+      },
+      {
+        "role": "assistant",
+        "content": "Smart! 3-day itinerary:\n\nFlights: $976\nHotel: Cancun Resort - $150/night\nActivities: Taco Tour, Snorkeling\n\nTotal: $1556"
+      }
+    ],
+    "metadata": {
+      "destination": "Cancun",
+      "budget": 3500
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want luxury Tokyo for $1500"
+      },
+      {
+        "role": "assistant",
+        "content": "$1500 is tight for luxury. Options:\nA) Luxury hotel, 8 days\nB) Mid-range hotel, 10 days\nC) Different destination\n\nWhich?"
+      },
+      {
+        "role": "user",
+        "content": "Option B"
+      },
+      {
+        "role": "assistant",
+        "content": "Smart! 10-day itinerary:\n\nFlights: $1871\nHotel: Tokyo Resort - $140/night\nActivities: Sushi Making, Temple Tour\n\nTotal: $3431"
+      }
+    ],
+    "metadata": {
+      "destination": "Tokyo",
+      "budget": 1500
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want luxury Iceland for $2500"
+      },
+      {
+        "role": "assistant",
+        "content": "$2500 is tight for luxury. Options:\nA) Luxury hotel, 3 days\nB) Mid-range hotel, 5 days\nC) Different destination\n\nWhich?"
+      },
+      {
+        "role": "user",
+        "content": "Option B"
+      },
+      {
+        "role": "assistant",
+        "content": "Smart! 5-day itinerary:\n\nFlights: $1106\nHotel: Iceland Resort - $130/night\nActivities: Glacier Hike, Northern Lights\n\nTotal: $2006"
+      }
+    ],
+    "metadata": {
+      "destination": "Iceland",
+      "budget": 2500
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want luxury Paris for $3500"
+      },
+      {
+        "role": "assistant",
+        "content": "$3500 is tight for luxury. Options:\nA) Luxury hotel, 3 days\nB) Mid-range hotel, 5 days\nC) Different destination\n\nWhich?"
+      },
+      {
+        "role": "user",
+        "content": "Option B"
+      },
+      {
+        "role": "assistant",
+        "content": "Smart! 5-day itinerary:\n\nFlights: $1372\nHotel: Paris Resort - $180/night\nActivities: Cooking Class, Louvre Tour\n\nTotal: $2432"
+      }
+    ],
+    "metadata": {
+      "destination": "Paris",
+      "budget": 3500
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want a 10-day trip to Tokyo with $4000 budget"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! For Tokyo with $4000, I found:\n- Flights: $1826\n- Hotels: $56-$280/night\n- Remaining: $774 for activities\n\nPrefer budget, mid-range, or luxury?"
+      },
+      {
+        "role": "user",
+        "content": "Budget"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! Tokyo Resort at $140/night. Activities:\n1. Mt. Fuji ($150)\n2. Sushi Making ($120)\n\nTotal: $3496. Good?"
+      }
+    ],
+    "metadata": {
+      "destination": "Tokyo",
+      "budget": 4000
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want a food vacation to Tokyo"
+      },
+      {
+        "role": "assistant",
+        "content": "Tokyo is perfect for food! Budget and duration?"
+      },
+      {
+        "role": "user",
+        "content": "$1500 for 10 days"
+      },
+      {
+        "role": "assistant",
+        "content": "With $1500 for 10 days:\n\nFlights: $1851\nHotel: Tokyo Resort - $140/night\nActivities: Mt. Fuji, Sushi Making\n\nTotal: $3521"
+      }
+    ],
+    "metadata": {
+      "destination": "Tokyo",
+      "budget": 1500
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want a 10-day trip to Cancun with $3000 budget"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! For Cancun with $3000, I found:\n- Flights: $952\n- Hotels: $60-$300/night\n- Remaining: $548 for activities\n\nPrefer budget, mid-range, or luxury?"
+      },
+      {
+        "role": "user",
+        "content": "Budget"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! Cancun Resort at $150/night. Activities:\n1. Snorkeling ($80)\n2. Taco Tour ($50)\n\nTotal: $2582. Good?"
+      }
+    ],
+    "metadata": {
+      "destination": "Cancun",
+      "budget": 3000
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want luxury Iceland for $1500"
+      },
+      {
+        "role": "assistant",
+        "content": "$1500 is tight for luxury. Options:\nA) Luxury hotel, 8 days\nB) Mid-range hotel, 10 days\nC) Different destination\n\nWhich?"
+      },
+      {
+        "role": "user",
+        "content": "Option B"
+      },
+      {
+        "role": "assistant",
+        "content": "Smart! 10-day itinerary:\n\nFlights: $1063\nHotel: Iceland Resort - $130/night\nActivities: Glacier Hike, Northern Lights\n\nTotal: $2613"
+      }
+    ],
+    "metadata": {
+      "destination": "Iceland",
+      "budget": 1500
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want a 14-day trip to Cancun with $2000 budget"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! For Cancun with $2000, I found:\n- Flights: $804\n- Hotels: $60-$300/night\n- Remaining: $-904 for activities\n\nPrefer budget, mid-range, or luxury?"
+      },
+      {
+        "role": "user",
+        "content": "Luxury"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! Cancun Resort at $150/night. Activities:\n1. Snorkeling ($80)\n2. Taco Tour ($50)\n\nTotal: $3034. Good?"
+      }
+    ],
+    "metadata": {
+      "destination": "Cancun",
+      "budget": 2000
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want luxury Bali for $2500"
+      },
+      {
+        "role": "assistant",
+        "content": "$2500 is tight for luxury. Options:\nA) Luxury hotel, 3 days\nB) Mid-range hotel, 5 days\nC) Different destination\n\nWhich?"
+      },
+      {
+        "role": "user",
+        "content": "Option B"
+      },
+      {
+        "role": "assistant",
+        "content": "Smart! 5-day itinerary:\n\nFlights: $1673\nHotel: Bali Resort - $120/night\nActivities: Cooking Class, Temple Tour\n\nTotal: $2383"
+      }
+    ],
+    "metadata": {
+      "destination": "Bali",
+      "budget": 2500
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want a 7-day trip to Tokyo with $4000 budget"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! For Tokyo with $4000, I found:\n- Flights: $1873\n- Hotels: $56-$280/night\n- Remaining: $1147 for activities\n\nPrefer budget, mid-range, or luxury?"
+      },
+      {
+        "role": "user",
+        "content": "Budget"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! Tokyo Resort at $140/night. Activities:\n1. Temple Tour ($40)\n2. Sushi Making ($120)\n\nTotal: $3013. Good?"
+      }
+    ],
+    "metadata": {
+      "destination": "Tokyo",
+      "budget": 4000
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want luxury Tokyo for $2000"
+      },
+      {
+        "role": "assistant",
+        "content": "$2000 is tight for luxury. Options:\nA) Luxury hotel, 12 days\nB) Mid-range hotel, 14 days\nC) Different destination\n\nWhich?"
+      },
+      {
+        "role": "user",
+        "content": "Option B"
+      },
+      {
+        "role": "assistant",
+        "content": "Smart! 14-day itinerary:\n\nFlights: $1876\nHotel: Tokyo Resort - $140/night\nActivities: Sushi Making, Mt. Fuji\n\nTotal: $4106"
+      }
+    ],
+    "metadata": {
+      "destination": "Tokyo",
+      "budget": 2000
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want a 14-day trip to Bali with $2000 budget"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! For Bali with $2000, I found:\n- Flights: $1524\n- Hotels: $48-$240/night\n- Remaining: $-1204 for activities\n\nPrefer budget, mid-range, or luxury?"
+      },
+      {
+        "role": "user",
+        "content": "Luxury"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! Bali Resort at $120/night. Activities:\n1. Temple Tour ($40)\n2. Surf Lesson ($60)\n\nTotal: $3304. Good?"
+      }
+    ],
+    "metadata": {
+      "destination": "Bali",
+      "budget": 2000
+    }
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want a 7-day trip to Iceland with $1500 budget"
+      },
+      {
+        "role": "assistant",
+        "content": "Great! For Iceland with $1500, I found:\n- Flights: $1002\n- Hotels: $52-$260/night\n- Remaining: $-412 for activities\n\nPrefer budget, mid-range, or luxury?"
+      },
+      {
+        "role": "user",
+        "content": "Budget"
+      },
+      {
+        "role": "assistant",
+        "content": "Perfect! Iceland Resort at $130/night. Activities:\n1. Northern Lights ($100)\n2. Glacier Hike ($150)\n\nTotal: $2162. Good?"
+      }
+    ],
+    "metadata": {
+      "destination": "Iceland",
+      "budget": 1500
+    }
+  }
+]
